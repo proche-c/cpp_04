@@ -37,6 +37,15 @@ int main()
     animals[i]->makeSound();
     i++;
   }
+
+  std::cout << "***************************************+" << std::endl;
+
+  Animal *copycat;
+
+  copycat = animals[3];
+  copycat->makeSound();
+  //delete copycat;
+
   i = 0;
   while (i < 10)
   {
