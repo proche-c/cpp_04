@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef AMATERIA_HPP
+# define AMATERIA_HPP
+#include "ICharacter.hpp"
+#include <string>
 
-Cat::Cat(void):Animal("Cat")
-{
-	std::cout << "Default Cat constructor called." << std::endl;
-	return ;
-}
+class ICharacter;
 
-Cat::Cat(Cat const &src)
+class AMateria
 {
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
-	return ;
-}
+	public:
+		AMateria(void);
+		AMateria(std::string const &type);
+		AMateria(AMateria const &src);
+		virtual ~AMateria(void);
 
-Cat::~Cat(void)
-{
-	std::cout <<"Cat destructor called." << std::endl;
-	return ;
-}
+		AMateria & operator=(AMateria const &src);
 
-Cat & Cat::operator=(Cat const &src)
-{
-	std::cout << "Copy Cat assignment operator called." << std::endl;
-	if (this != &src)
-	{
-		this->type = src.getType();
-	}
-	return *this;
-}
+		std::string const &getType() const; //Returns the materia type
+		virtual AMateria* clone(void) const = 0;
+		virtual void use(ICharacter& target);
 
-void	Cat::makeSound(void) const
-{
-	std::cout << "Meowwwww..." << std::endl;
-	return ;
-}
+	protected:
+		std::string	type;
+		
+
+};
+#endif

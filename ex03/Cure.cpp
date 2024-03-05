@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Cure.hpp"
+#include <iostream>
 
-Cat::Cat(void):Animal("Cat")
+Cure::Cure(void):AMateria("cure")
 {
-	std::cout << "Default Cat constructor called." << std::endl;
+	std::cout << "Default Cure constructor called." << std::endl;
 	return ;
 }
 
-Cat::Cat(Cat const &src)
+Cure::Cure(std::string const &type):AMateria(type)
 {
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
+	std::cout << "Default Cure constructor called." << std::endl;
 	return ;
 }
 
-Cat::~Cat(void)
+Cure::Cure(Cure const &src):AMateria(src)
 {
-	std::cout <<"Cat destructor called." << std::endl;
+	std::cout << "Copy Cure constructor called" << std::endl;
 	return ;
 }
 
-Cat & Cat::operator=(Cat const &src)
+Cure::~Cure(void)
 {
-	std::cout << "Copy Cat assignment operator called." << std::endl;
+	std::cout <<"Cure destructor called." << std::endl;
+	return ;
+}
+
+Cure & Cure::operator=(Cure const &src)
+{
+	std::cout << "Cure copy assignment operator called." << std::endl;
 	if (this != &src)
 	{
 		this->type = src.getType();
@@ -41,8 +47,13 @@ Cat & Cat::operator=(Cat const &src)
 	return *this;
 }
 
-void	Cat::makeSound(void) const
+AMateria* Cure::clone(void) const
 {
-	std::cout << "Meowwwww..." << std::endl;
+	return new Cure();
+}
+
+void Cure::use(ICharacter& target)
+{
+	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
 	return ;
 }

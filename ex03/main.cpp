@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include <iostream>
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "Character.hpp"
+#include "MateriaSource.hpp"
 
-Cat::Cat(void):Animal("Cat")
+int main()
 {
-	std::cout << "Default Cat constructor called." << std::endl;
-	return ;
-}
-
-Cat::Cat(Cat const &src)
-{
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
-	return ;
-}
-
-Cat::~Cat(void)
-{
-	std::cout <<"Cat destructor called." << std::endl;
-	return ;
-}
-
-Cat & Cat::operator=(Cat const &src)
-{
-	std::cout << "Copy Cat assignment operator called." << std::endl;
-	if (this != &src)
-	{
-		this->type = src.getType();
-	}
-	return *this;
-}
-
-void	Cat::makeSound(void) const
-{
-	std::cout << "Meowwwww..." << std::endl;
-	return ;
+  IMateriaSource* src = new MateriaSource();
+  src->learnMateria(new Ice());
+  src->learnMateria(new Cure());
+  ICharacter* me = new Character("me");
+  AMateria* tmp;
+  tmp = src->createMateria("ice");
+  me->equip(tmp);
+  tmp = src->createMateria("cure");
+  me->equip(tmp);
+  ICharacter* bob = new Character("bob");
+  me->use(0, *bob);
+  me->use(1, *bob);
+  delete bob;
+  delete me;
+  delete src;
+  return 0;
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   AMateria.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,37 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "AMateria.hpp"
+#include <iostream>
 
-Cat::Cat(void):Animal("Cat")
+AMateria::AMateria(void):type("")
 {
-	std::cout << "Default Cat constructor called." << std::endl;
+	std::cout << "Default AMateria constructor called." << std::endl;
 	return ;
 }
 
-Cat::Cat(Cat const &src)
+AMateria::AMateria(std::string const &type):type(type)
 {
-	std::cout << "Copy Cat constructor called." << std::endl;
+	std::cout << "Default AMateria constructor called." << std::endl;
+	return ;
+}
+
+AMateria::AMateria(AMateria const &src)
+{
+	std::cout << "Copy AMateria constructor called" << std::endl;
 	*this = src;
 	return ;
 }
 
-Cat::~Cat(void)
+AMateria::~AMateria(void)
 {
-	std::cout <<"Cat destructor called." << std::endl;
+	std::cout <<"AMateria destructor called." << std::endl;
 	return ;
 }
 
-Cat & Cat::operator=(Cat const &src)
+AMateria & AMateria::operator=(AMateria const &src)
 {
-	std::cout << "Copy Cat assignment operator called." << std::endl;
+	std::cout << "AMateria copy assignment operator called." << std::endl;
 	if (this != &src)
 	{
 		this->type = src.getType();
@@ -41,8 +48,13 @@ Cat & Cat::operator=(Cat const &src)
 	return *this;
 }
 
-void	Cat::makeSound(void) const
+std::string const &AMateria::getType() const
 {
-	std::cout << "Meowwwww..." << std::endl;
+	return this->type;
+}
+
+void AMateria::use(ICharacter& target)
+{
+	std::cout << this->getType() << " used on " << target.getName() << std::endl;
 	return ;
 }

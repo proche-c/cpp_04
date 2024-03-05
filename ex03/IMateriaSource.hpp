@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef IMATERIASOURCE_HPP
+# define IMATERIASOURCE_HPP
+#include "AMateria.hpp"
 
-Cat::Cat(void):Animal("Cat")
+class IMateriaSource
 {
-	std::cout << "Default Cat constructor called." << std::endl;
-	return ;
-}
-
-Cat::Cat(Cat const &src)
-{
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
-	return ;
-}
-
-Cat::~Cat(void)
-{
-	std::cout <<"Cat destructor called." << std::endl;
-	return ;
-}
-
-Cat & Cat::operator=(Cat const &src)
-{
-	std::cout << "Copy Cat assignment operator called." << std::endl;
-	if (this != &src)
-	{
-		this->type = src.getType();
-	}
-	return *this;
-}
-
-void	Cat::makeSound(void) const
-{
-	std::cout << "Meowwwww..." << std::endl;
-	return ;
-}
+    public:
+        virtual ~IMateriaSource() {}
+        virtual void learnMateria(AMateria*) = 0;
+        virtual AMateria* createMateria(std::string const & type) = 0;
+};
+#endif

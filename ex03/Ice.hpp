@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef ICE_HPP
+# define ICE_HPP
+#include "AMateria.hpp"
 
-Cat::Cat(void):Animal("Cat")
+class Ice: public AMateria
 {
-	std::cout << "Default Cat constructor called." << std::endl;
-	return ;
-}
+	public:
+		Ice(void);
+		Ice(std::string const &type);
+		Ice(Ice const &src);
+		virtual ~Ice(void);
 
-Cat::Cat(Cat const &src)
-{
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
-	return ;
-}
+		Ice & operator=(Ice const &src);
 
-Cat::~Cat(void)
-{
-	std::cout <<"Cat destructor called." << std::endl;
-	return ;
-}
-
-Cat & Cat::operator=(Cat const &src)
-{
-	std::cout << "Copy Cat assignment operator called." << std::endl;
-	if (this != &src)
-	{
-		this->type = src.getType();
-	}
-	return *this;
-}
-
-void	Cat::makeSound(void) const
-{
-	std::cout << "Meowwwww..." << std::endl;
-	return ;
-}
+		virtual AMateria* clone(void) const;
+		virtual void use(ICharacter& target);
+		
+};
+#endif

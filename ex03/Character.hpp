@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,39 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
+//#include "AMateria.hpp"
+#include "ICharacter.hpp"
 
-Cat::Cat(void):Animal("Cat")
-{
-	std::cout << "Default Cat constructor called." << std::endl;
-	return ;
-}
+# define INV_SIZE   4
 
-Cat::Cat(Cat const &src)
+class Character: public ICharacter
 {
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
-	return ;
-}
+    public:
+        Character(void);
+        Character(std::string const &name);
+        Character(Character &src);
+        virtual ~Character(void);
 
-Cat::~Cat(void)
-{
-	std::cout <<"Cat destructor called." << std::endl;
-	return ;
-}
+        Character & operator=(Character const &src);
 
-Cat & Cat::operator=(Cat const &src)
-{
-	std::cout << "Copy Cat assignment operator called." << std::endl;
-	if (this != &src)
-	{
-		this->type = src.getType();
-	}
-	return *this;
-}
+        virtual std::string const & getName() const;
+        virtual void equip(AMateria* m);
+        virtual void unequip(int idx);
+        virtual void use(int idx, ICharacter& target);
 
-void	Cat::makeSound(void) const
-{
-	std::cout << "Meowwwww..." << std::endl;
-	return ;
-}
+    private:
+        std::string _name;
+        AMateria *_inventory[INV_SIZE];
+};
+#endif

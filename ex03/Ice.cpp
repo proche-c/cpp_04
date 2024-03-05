@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Ice.hpp"
+#include <iostream>
 
-Cat::Cat(void):Animal("Cat")
+Ice::Ice(void):AMateria("ice")
 {
-	std::cout << "Default Cat constructor called." << std::endl;
+	std::cout << "Default Ice constructor called." << std::endl;
 	return ;
 }
 
-Cat::Cat(Cat const &src)
+Ice::Ice(std::string const &type):AMateria(type)
 {
-	std::cout << "Copy Cat constructor called." << std::endl;
-	*this = src;
+	std::cout << "Default Ice constructor called." << std::endl;
 	return ;
 }
 
-Cat::~Cat(void)
+Ice::Ice(Ice const &src):AMateria(src)
 {
-	std::cout <<"Cat destructor called." << std::endl;
+	std::cout << "Copy Ice constructor called" << std::endl;
 	return ;
 }
 
-Cat & Cat::operator=(Cat const &src)
+Ice::~Ice(void)
 {
-	std::cout << "Copy Cat assignment operator called." << std::endl;
+	std::cout <<"Ice destructor called." << std::endl;
+	return ;
+}
+
+Ice & Ice::operator=(Ice const &src)
+{
+	std::cout << "Ice copy assignment operator called." << std::endl;
 	if (this != &src)
 	{
 		this->type = src.getType();
@@ -41,8 +47,13 @@ Cat & Cat::operator=(Cat const &src)
 	return *this;
 }
 
-void	Cat::makeSound(void) const
+AMateria* Ice::clone(void) const
 {
-	std::cout << "Meowwwww..." << std::endl;
+	return new Ice();
+}
+
+void Ice::use(ICharacter& target)
+{
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 	return ;
 }
